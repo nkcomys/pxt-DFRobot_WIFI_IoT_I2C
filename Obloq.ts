@@ -505,8 +505,6 @@ namespace DFRobotWiFiIoTI2C {
     }
 
 
-
-
     /**
      * Two parallel stepper motors are executed simultaneously(DegreeDual).
      * @param IP to IP ,eg: "0.0.0.0"
@@ -531,50 +529,26 @@ namespace DFRobotWiFiIoTI2C {
      * @param time set timeout, eg: 10000
     */
 	
-    //% weight=27
-    //% blockId=WiFi_IoT_I2C_http_get
-    //% block="http(get) | url %url| timeout(ms) %time"
-    
-    export function httpGet(url: string, time: number): string {
-        microIoT_ParaRunCommand(GET_URL, url)
-        return "a"//microIoT_http_wait_request(time);
-    }
 
     //% weight=40
-    //% blockId=WiFi_IoT_I2C_http_get2
-    //% block="http(get)2 | url %url| content %content| timeout(ms) %time"
+    //% blockId=WiFi_IoT_I2C_http_get
+    //% block="http(get) | url %url| path %path| timeout(ms) %time"
     //% inlineInputMode=inline
-    export function httpGet2(url: string, content: string, time: number) {
+    export function httpGet(url: string, path: string, time: number) {
         microIoT_setPara(SETHTTP_IP, url)
-        let tempStr =content
+        let tempStr =path
         microIoT_ParaRunCommand(GET_URL, tempStr)
     }
 
 
-    /**
-     * The HTTP post request.url(string): URL; content(string):content
-     * time(ms): private long maxWait
-     * @param time set timeout, eg: 10000
-    */
-    //% weight=26
-    //% blockId=WiFi_IoT_I2C_http_post
-    //% block="http(post) | url %url| content %content| timeout(ms) %time"
-    
-    export function httpPost(url: string, content: string, time: number): string {
-        let tempStr = ""
-        tempStr = url + "," + content;
-        microIoT_ParaRunCommand(POST_URL, tempStr)
-        return microIoT_http_wait_request(time);
-    }
-
     //% weight=40
-    //% blockId=WiFi_IoT_I2C_http_post2
-    //% block="http(post)2 | url %url| content %content| timeout(ms) %time"
+    //% blockId=WiFi_IoT_I2C_http_post
+    //% block="http(post) | url %url| path %path| json %json| timeout(ms) %time"
     //% inlineInputMode=inline
-    export function httpPost2(url: string, content: string, time: number): string {
+    export function httpPost(url: string, path: string, json: string, time: number): string {
         microIoT_setPara(SETHTTP_IP, url)
         let tempStr = ""
-        tempStr = content + "\r"
+        tempStr = path+","+json + "\r"
         microIoT_ParaRunCommand(POST_URL, tempStr)
         return microIoT_http_wait_request(time);
     }
