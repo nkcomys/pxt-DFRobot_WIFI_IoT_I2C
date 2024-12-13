@@ -505,6 +505,8 @@ namespace DFRobotWiFiIoTI2C {
     }
 
 
+
+
     /**
      * Two parallel stepper motors are executed simultaneously(DegreeDual).
      * @param IP to IP ,eg: "0.0.0.0"
@@ -538,6 +540,16 @@ namespace DFRobotWiFiIoTI2C {
         return "a"//microIoT_http_wait_request(time);
     }
 
+    //% weight=40
+    //% blockId=WiFi_IoT_I2C_http_get2
+    //% block="http(get)2 | url %url| timeout(ms) %time"
+    //% inlineInputMode=inline
+    export function httpGet2(url: string, content: string, time: number) {
+        microIoT_setPara(SETHTTP_IP, url)
+        let tempStr =content
+        microIoT_ParaRunCommand(GET_URL, tempStr)
+    }
+
 
     /**
      * The HTTP post request.url(string): URL; content(string):content
@@ -551,6 +563,18 @@ namespace DFRobotWiFiIoTI2C {
     export function httpPost(url: string, content: string, time: number): string {
         let tempStr = ""
         tempStr = url + "," + content;
+        microIoT_ParaRunCommand(POST_URL, tempStr)
+        return microIoT_http_wait_request(time);
+    }
+
+    //% weight=40
+    //% blockId=WiFi_IoT_I2C_http_post2
+    //% block="http(post)2 | url %url| content %content| timeout(ms) %time"
+    //% inlineInputMode=inline
+    export function httpPost2(url: string, content: string, time: number): string {
+        microIoT_setPara(SETHTTP_IP, url)
+        let tempStr = ""
+        tempStr = content + "\r"
         microIoT_ParaRunCommand(POST_URL, tempStr)
         return microIoT_http_wait_request(time);
     }
