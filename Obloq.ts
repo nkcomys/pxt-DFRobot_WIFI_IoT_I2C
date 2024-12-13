@@ -542,7 +542,7 @@ namespace DFRobotWiFiIoTI2C {
 
     //% weight=40
     //% blockId=WiFi_IoT_I2C_http_get2
-    //% block="http(get)2 | url %url| timeout(ms) %time"
+    //% block="http(get)2 | url %url| content %content| timeout(ms) %time"
     //% inlineInputMode=inline
     export function httpGet2(url: string, content: string, time: number) {
         microIoT_setPara(SETHTTP_IP, url)
